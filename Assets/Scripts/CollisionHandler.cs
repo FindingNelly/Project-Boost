@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
 
+    
     const string Finish = "Finish";
     const string Friendly = "Friendly";
-    
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -20,11 +22,18 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("friend");
                 break;
             default:
-                Debug.Log("dead");
+                ReloadLevel();
+
                 break;
 
         }
-            
+        void ReloadLevel()
+        {
+            int activeScene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(activeScene);
+        }
+        
+     
 
 
     }
