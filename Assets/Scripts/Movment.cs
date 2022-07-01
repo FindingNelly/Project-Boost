@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Movment : MonoBehaviour
@@ -14,19 +12,19 @@ public class Movment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myRigibody= GetComponent<Rigidbody>();
-        myAudioSource= GetComponent<AudioSource>();
+        myRigibody = GetComponent<Rigidbody>();
+        myAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         MovmentInput();
 
     }
 
-     void MovmentInput()
+    void MovmentInput()
     {
         //trust
         if (Input.GetKey(KeyCode.W))
@@ -56,7 +54,7 @@ public class Movment : MonoBehaviour
 
     private void ApplyTtrust(float trust)
     {
-        
+
         myRigibody.AddRelativeForce(Vector3.up * trust * Time.deltaTime);
 
     }
