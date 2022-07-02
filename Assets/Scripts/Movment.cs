@@ -3,21 +3,21 @@ using UnityEngine;
 public class Movment : MonoBehaviour
 {
 
-    
+
     Rigidbody myRigibody;
     AudioSource myAudioSource;
 
     [SerializeField] float mainTrust = 1f;
     [SerializeField] float rotationTrust = 1f;
     [SerializeField] AudioClip trustSound;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         myRigibody = GetComponent<Rigidbody>();
         myAudioSource = GetComponent<AudioSource>();
-        
+
     }
 
     // Update is called once per frame
@@ -33,8 +33,8 @@ public class Movment : MonoBehaviour
         //trust
         if (Input.GetKey(KeyCode.W))
         {
-            
-            
+
+
             ApplyTtrust(mainTrust);
             if (!myAudioSource.isPlaying)
             {
