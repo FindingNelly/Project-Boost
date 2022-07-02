@@ -13,24 +13,26 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField]float timeLoadNext = 2f;
     [SerializeField] AudioClip finishSound;
     [SerializeField] AudioClip crashSound;
-
+      public bool transiting = false;
   
 
     private void Awake()
     {
         myMover = GetComponent<Movment>();
         myAudioSource = GetComponent<AudioSource>();
+        Debug.Log(transiting);
         
     }
 
     private void Update()
     {
-        
+      
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (transiting) { return;}
         switch (collision.gameObject.tag)
         {
 
@@ -41,7 +43,7 @@ public class CollisionHandler : MonoBehaviour
                 LoadLevel("NextLevel",finishSound);
                 break;
             default:
-                
+                            
                 LoadLevel("ReloadLevel", crashSound);
                 break;
 
@@ -51,6 +53,8 @@ public class CollisionHandler : MonoBehaviour
     
     void LoadLevel(string level, AudioClip soundeffect)
     {
+        transiting=true;
+        myAudioSource.Stop();
         myAudioSource.PlayOneShot(soundeffect);
         myMover.enabled = false;
         Invoke(level, timeLoadNext);
