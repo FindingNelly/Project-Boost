@@ -9,6 +9,9 @@ public class Movment : MonoBehaviour
 
     [SerializeField] float mainTrust = 1f;
     [SerializeField] float rotationTrust = 1f;
+    [SerializeField] AudioClip trustSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +35,7 @@ public class Movment : MonoBehaviour
             ApplyTtrust(mainTrust);
             if (!myAudioSource.isPlaying)
             {
-                myAudioSource.Play();
+                myAudioSource.PlayOneShot(trustSound);
             }
 
         }

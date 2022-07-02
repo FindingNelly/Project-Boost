@@ -5,14 +5,28 @@ public class CollisionHandler : MonoBehaviour
 {
 
     Movment myMover;
+    AudioSource myAudioSource;
     const string Finish = "Finish";
     const string Friendly = "Friendly";
+    
+    
     [SerializeField]float timeLoadNext = 2f;
+    [SerializeField] AudioClip finishSound;
+    [SerializeField] AudioClip crashSound;
+
+  
+
     private void Awake()
     {
         myMover = GetComponent<Movment>();
+        myAudioSource = GetComponent<AudioSource>();
+        
     }
 
+    private void Update()
+    {
+        
+    }
 
 
     private void OnCollisionEnter(Collision collision)
@@ -21,22 +35,26 @@ public class CollisionHandler : MonoBehaviour
         {
 
             case Friendly:
-                Debug.Log("friend");
+                Debug.Log("friendy");
                 break;
             case Finish:
-                LoadLevel("NextLevel");
+                LoadLevel("NextLevel",finishSound);
                 break;
             default:
-                LoadLevel("ReloadLevel");
+                
+                LoadLevel("ReloadLevel", crashSound);
                 break;
 
         }
     }
-    void LoadLevel(string level)
-    {
-       myMover.enabled = false;
-        Invoke(level, timeLoadNext);
 
+    
+    void LoadLevel(string level, AudioClip soundeffect)
+    {
+        myAudioSource.PlayOneShot(soundeffect);
+        myMover.enabled = false;
+        Invoke(level, timeLoadNext);
+        
     }
 
     void ReloadLevel()
@@ -55,7 +73,7 @@ public class CollisionHandler : MonoBehaviour
         SceneManager.LoadScene(nextScene);
     }
 
-
+    
 
 
 
