@@ -18,7 +18,7 @@ public class CollisionHandler : MonoBehaviour
 
 
     public bool transiting = false;
-
+    bool collisionDisable = false;
 
     private void Awake()
     {
@@ -27,11 +27,30 @@ public class CollisionHandler : MonoBehaviour
 
 
     }
+    private void Update()
+    {
+        DebugKeys();
+    }
 
+    private void DebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            NextLevelLoad();
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            ReloadLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionDisable = !collisionDisable;
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (transiting) { return; }
+        if (transiting || collisionDisable) { return; }
         switch (collision.gameObject.tag)
         {
 

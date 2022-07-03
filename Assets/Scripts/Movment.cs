@@ -11,7 +11,7 @@ public class Movment : MonoBehaviour
     [SerializeField] float rotationTrust = 1f;
     [SerializeField] AudioClip trustSound;
     [SerializeField] ParticleSystem main;
-    
+
 
 
 
@@ -20,15 +20,12 @@ public class Movment : MonoBehaviour
     {
         myRigibody = GetComponent<Rigidbody>();
         myAudioSource = GetComponent<AudioSource>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
         MovmentInput();
-
     }
 
     void MovmentInput()
@@ -38,18 +35,13 @@ public class Movment : MonoBehaviour
         {
 
             if (!main.isPlaying)
-            { 
+            {
                 main.Play();
-                
-
             }
-               
-
 
             ApplyTtrust(mainTrust);
             if (!myAudioSource.isPlaying)
             {
-                
                 myAudioSource.PlayOneShot(trustSound);
             }
 
@@ -57,7 +49,6 @@ public class Movment : MonoBehaviour
 
         else
         {
-
             main.Stop();
             myAudioSource.Stop();
         }
@@ -65,34 +56,19 @@ public class Movment : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             ApplyRotation(rotationTrust);
-           
-
-
-
         }
 
         //right
         else if (Input.GetKey(KeyCode.D))
         {
             ApplyRotation(-rotationTrust);
-            
-            
-
-
-
-
         }
-        
-        
+
     }
 
     private void ApplyTtrust(float trust)
     {
-        
         myRigibody.AddRelativeForce(Vector3.up * trust * Time.deltaTime);
-   
-   
-
     }
 
     private void ApplyRotation(float rotation)
@@ -102,5 +78,5 @@ public class Movment : MonoBehaviour
         myRigibody.freezeRotation = false;
     }
 
-   
+
 }
