@@ -51,14 +51,14 @@ public class CollisionHandler : MonoBehaviour
     }
 
 
-    void CollisionTrigger(string level, AudioClip soundeffect, ParticleSystem particals)
+    void CollisionTrigger(string trigger, AudioClip soundeffect, ParticleSystem particals)
     {
         particals.Play();
         transiting = true;
         myAudioSource.Stop();
         myAudioSource.PlayOneShot(soundeffect);
         myMover.enabled = false;
-        Invoke(level, timeLoadNext);
+        Invoke(trigger, timeLoadNext);
 
     }
 
